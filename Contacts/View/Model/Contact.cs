@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using View.Model.Services;
 
 namespace View.Model
 {
     internal class Contact
     {
         private string _fullName;
-
-        private string _email;
 
         private int _phoneNumber;
 
@@ -26,23 +25,16 @@ namespace View.Model
 
         }
 
+        public string Email { get; set; }
+
         public string FullName 
         {
             get { return _fullName; }
 
             set 
             {
-                _fullName = value; 
-            }
-        }
-
-        public string Email 
-        {
-            get { return _email; } 
-
-            set
-            { 
-                _email = value; 
+                _fullName =
+                    ValueValidator.AssertStringContainsOnlyLetters(value, nameof(FullName)); 
             }
         }
 
@@ -52,7 +44,9 @@ namespace View.Model
 
             set
             {
-                _phoneNumber = value;
+                _phoneNumber = 
+                    ValueValidator.AssertValueOnNumberOfDigits(value, 11, nameof(PhoneNumber));
+                _phoneNumber = ValueValidator.AssertOnPositiveValue(value, nameof(PhoneNumber));
             }
         }
     }
