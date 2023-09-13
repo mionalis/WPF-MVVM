@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Contacts" Height="450" Width="800">
     <Grid>
-        
+        <GroupBox Header="Edit Contact" Margin="15,15,405,75">
+            <Grid Height="332" Margin="-4,0,0,0">
+                <Label Content="Name:" HorizontalAlignment="Left" Margin="2,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.321,0.717"/>
+                <TextBox HorizontalAlignment="Center" Margin="0,26,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="354"/>
+                <Label Content="Phone number:" HorizontalAlignment="Left" Margin="2,44,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.321,0.717"/>
+                <TextBox HorizontalAlignment="Center" Margin="0,70,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="356"/>
+                <Label Content="Name:" HorizontalAlignment="Left" Margin="2,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.321,0.717"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Read Contact" Margin="405,15,15,75">
+            <Grid HorizontalAlignment="Left" Width="368" Margin="-5,0,0,0">
+                <Label Content="" HorizontalAlignment="Left" Margin="3,10,0,0" VerticalAlignment="Top"/>
+                <Label Content="Name:" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Top"/>
+                <Label Content="Label" HorizontalAlignment="Left" Margin="3,22,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Content="Phone number:" HorizontalAlignment="Left" Margin="3,44,0,0" VerticalAlignment="Top"/>
+                <Label Content="Label" HorizontalAlignment="Left" Margin="3,66,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Content="Email:" HorizontalAlignment="Left" Margin="3,88,0,0" VerticalAlignment="Top"/>
+                <Label Content="Label" HorizontalAlignment="Left" Margin="3,110,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            </Grid>
+        </GroupBox>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="630,374,0,35" Width="75"/>
+        <Button Content="Load" HorizontalAlignment="Left" Margin="710,374,0,35" Width="75"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Margin="19,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.321,0.717"/>
+        <TextBox HorizontalAlignment="Left" Margin="25,146,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="355"/>
     </Grid>
 </Window>
