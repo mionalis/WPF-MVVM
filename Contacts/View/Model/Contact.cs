@@ -18,9 +18,9 @@ namespace View.Model
         private string _fullName;
 
         /// <summary>
-        /// Телефонный номер контакта.
+        /// Телефонный номер контакта. Формат ввода: "89001002233".
         /// </summary>
-        private int _phoneNumber;
+        private string _phoneNumber;
 
         /// <summary>
         /// Создаёт экземпляр класса <see cref="Contact"/>.
@@ -28,7 +28,7 @@ namespace View.Model
         /// <param name="fullName">Фамилия и имя контакта.</param>
         /// <param name="email">Электронная почта контакта.</param>
         /// <param name="phoneNumber">Телефонный номер контакта.</param>
-        public Contact(string fullName, string email, int phoneNumber)
+        public Contact(string fullName, string email, string phoneNumber)
         {
             FullName = fullName;
             Email = email;
@@ -55,30 +55,26 @@ namespace View.Model
         /// символов английского алфавита.</exception>
         public string FullName 
         {
-            get { return _fullName; }
+            get => _fullName;
 
             set 
             {
-                _fullName =
-                    ValueValidator.AssertStringContainsOnlyLetters(value, nameof(FullName)); 
+                _fullName = ValueValidator.AssertStringOnLength(value, 100, nameof(FullName)); 
             }
         }
 
         /// <summary>
-        /// Возвращает и задает телефонный номер контакта.
+        /// Возвращает и задает телефонный номер контакта. Формат ввода: "89001002233".
         /// </summary>
         /// <exception cref="ArgumentException">Выбрасывается, если длина строки превышает 
         /// заданное значение.</exception>
-        /// <exception cref="ArgumentException">Выбрасывается, если значение неположительное.</exception>
-        public int PhoneNumber 
-        { 
-            get { return _phoneNumber; }
+        public string PhoneNumber 
+        {
+            get => _phoneNumber;
 
             set
             {
-                _phoneNumber = 
-                    ValueValidator.AssertValueOnNumberOfDigits(value, 11, nameof(PhoneNumber));
-                _phoneNumber = ValueValidator.AssertOnPositiveValue(value, nameof(PhoneNumber));
+                _phoneNumber = ValueValidator.AssertStringOnLength(value, 11, nameof(FullName));
             }
         }
     }
