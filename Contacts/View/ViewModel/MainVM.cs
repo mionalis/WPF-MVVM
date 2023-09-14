@@ -12,10 +12,19 @@ using View.Model;
 
 namespace View.ViewModel
 {
+    /// <summary>
+    /// Реализует ViewModel для главного окна.
+    /// </summary>
     internal class MainVM : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Возвращает и задает контакт: экземпляр класса Contact. 
+        /// </summary>
         public Contact Contact { get; set; } = new Contact();
 
+        /// <summary>
+        /// Возвращает и задает фамилию и имя контакта. Формат ввода: "Ivanov Ivan".
+        /// </summary>
         public string FullName
         {
             get => Contact.FullName;
@@ -26,6 +35,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Возвращает и задает телефонный номер контакта. Формат ввода: "89001002233".
+        /// </summary>
         public string PhoneNumber
         {
             get => Contact.PhoneNumber;
@@ -36,6 +48,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Возвращает и задает электронную почту контакта.
+        /// </summary>
         public string Email
         {
             get => Contact.Email;
@@ -46,8 +61,15 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Срабатывает, когда объект класса изменяет значение свойства.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Вызывает событие PropertyChanged при изменении свойства.
+        /// </summary>
+        /// <param name="prop"></param>
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));

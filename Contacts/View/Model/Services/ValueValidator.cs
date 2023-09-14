@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace View.Model.Services
 {
+    /// <summary>
+    /// Реализует валидацию значений.
+    /// </summary>
     internal static class ValueValidator
     {
         /// <summary>
