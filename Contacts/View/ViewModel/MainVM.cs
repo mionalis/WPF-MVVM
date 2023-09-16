@@ -18,8 +18,14 @@ namespace View.ViewModel
     /// </summary>
     internal class MainVM : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Команда сохранения контакта в файл.
+        /// </summary>
         private RelayCommand _saveCommand;
 
+        /// <summary>
+        /// Команда загрузки сохраненного контакта из файла.
+        /// </summary>
         private RelayCommand _loadCommand;
 
         /// <summary>
@@ -27,6 +33,9 @@ namespace View.ViewModel
         /// </summary>
         public Contact Contact { get; set; } = new Contact();
 
+        /// <summary>
+        /// Возвращает команду сохранения контакта в файл.
+        /// </summary>
         public RelayCommand SaveCommand
         {
             get
@@ -39,6 +48,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Возвращает команду загрузки сохраненного контакта из файла.
+        /// </summary>
         public RelayCommand LoadCommand
         {
             get
