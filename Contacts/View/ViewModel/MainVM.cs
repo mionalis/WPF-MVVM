@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 using View.Model;
+using View.Model.Services;
 
 namespace View.ViewModel
 {
@@ -17,10 +18,41 @@ namespace View.ViewModel
     /// </summary>
     internal class MainVM : INotifyPropertyChanged
     {
+        private RelayCommand _saveCommand;
+
+        private RelayCommand _loadCommand;
+
         /// <summary>
         /// Возвращает и задает контакт: экземпляр класса Contact. 
         /// </summary>
         public Contact Contact { get; set; } = new Contact();
+
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                return _saveCommand ??
+                       (_saveCommand = new RelayCommand(obj =>
+                       {
+                           ContactSerializer.Save(Contact);
+                       }));
+            }
+        }
+
+        public RelayCommand LoadCommand
+        {
+            get
+            {
+                return _loadCommand ??
+                       (_loadCommand = new RelayCommand(obj =>
+                       {
+                           var contact = ContactSerializer.Load();
+                           FullName = contact.FullName;
+                           Email = contact.Email;
+                           PhoneNumber = contact.PhoneNumber;
+                       }));
+            }
+        }
 
         /// <summary>
         /// Возвращает и задает фамилию и имя контакта. Формат ввода: "Ivanov Ivan".

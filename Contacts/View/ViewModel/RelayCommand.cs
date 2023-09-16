@@ -4,19 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using View.Model.Services;
-using View.Model;
 
 namespace View.ViewModel
 {
-    internal class LoadCommand : ICommand
+    internal class RelayCommand : ICommand
     {
-        public Contact Contact { get; set; }
+        private Action<object> execute;
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler CanExecuteChanged;
+
+        public RelayCommand(Action<object> execute)
         {
-            add => CommandManager.RequerySuggested += value;
-            remove => CommandManager.RequerySuggested -= value;
+            this.execute = execute;
         }
 
         public bool CanExecute(object parameter)
@@ -26,7 +25,8 @@ namespace View.ViewModel
 
         public void Execute(object parameter)
         {
-            Contact = ContactSerializer.Load();
+            this.execute(parameter);
         }
     }
 }
+
