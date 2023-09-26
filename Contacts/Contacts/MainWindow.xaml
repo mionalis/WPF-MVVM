@@ -6,7 +6,34 @@
         xmlns:local="clr-namespace:Contacts"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch" Background='White'/>
+        <DockPanel Grid.Row="0" Grid.Column="0" Background="#f8f8f8" Margin="8">
+            <DockPanel DockPanel.Dock="Top">
+                <TextBlock Text="Find:" Margin="3"/>
+                <TextBox Width="Auto" Height="25" Margin="3"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+               <ListBox Margin="3"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Bottom" LastChildFill="false">
+                <Grid DockPanel.Dock="Bottom">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Height="25" Margin="3" Content="Add"/>
+                <Button Grid.Column="1" Height="25" Margin="3" Content="Edit"/>
+                <Button Grid.Column="2" Height="25" Margin="3" Content="Remove"/>
+                </Grid>
+            </DockPanel>
+        </DockPanel>
     </Grid>
 </Window>
