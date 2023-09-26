@@ -12,15 +12,12 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Row="0" Grid.Column="0" Background="#f8f8f8" Margin="8">
+        <DockPanel Grid.Row="0" Grid.Column="0" Background="#f8f8f8" Margin="8" LastChildFill="True">
             <DockPanel DockPanel.Dock="Top">
                 <TextBlock Text="Find:" Margin="3"/>
                 <TextBox Width="Auto" Margin="3"/>
             </DockPanel>
-            <DockPanel DockPanel.Dock="Top">
-                <ListBox Margin="3"/>
-            </DockPanel>
-            <DockPanel DockPanel.Dock="Bottom" LastChildFill="false">
+            <DockPanel DockPanel.Dock="Bottom" LastChildFill="false" VerticalAlignment="Bottom">
                 <Button 
                     Height="25"
                     Width="75" 
@@ -39,6 +36,9 @@
                     Margin="3" 
                     Content="Remove"
                     VerticalAlignment="Bottom"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top" LastChildFill="true">
+                <ListBox Margin="3"/>
             </DockPanel>
         </DockPanel>
         <GridSplitter 
