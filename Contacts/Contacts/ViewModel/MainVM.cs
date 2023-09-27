@@ -11,7 +11,7 @@ namespace ContactsApp.ViewModel
     /// <summary>
     /// Реализует ViewModel для главного окна.
     /// </summary>
-    internal class MainVM : INotifyPropertyChanged
+    internal class MainVM 
     {
         /// <summary>
         /// 
@@ -54,20 +54,6 @@ namespace ContactsApp.ViewModel
                            Contacts.Add(CurrentContact);
                        }));
             }
-        }
-
-        /// <summary>
-        /// Срабатывает, когда объект класса изменяет значение свойства.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Вызывает событие PropertyChanged при изменении свойства.
-        /// </summary>
-        /// <param name="prop"></param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
