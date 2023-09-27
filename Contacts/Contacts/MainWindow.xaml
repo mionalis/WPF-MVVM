@@ -39,7 +39,8 @@
             </DockPanel>
             <DockPanel DockPanel.Dock="Top" LastChildFill="true">
                 <ListBox Margin="3" DisplayMemberPath="FullName"
-                         ItemsSource="{Binding Path=Contacts}"/>
+                         ItemsSource="{Binding Path=Contacts}"
+                         SelectedItem="{Binding Path=CurrentContact, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
         </DockPanel>
         <GridSplitter 

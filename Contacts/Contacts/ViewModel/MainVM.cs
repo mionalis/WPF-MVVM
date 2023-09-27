@@ -25,7 +25,8 @@ namespace ContactsApp.ViewModel
         /// </summary>
         public ContactVM CurrentContact { get; set; } 
 
-        public ObservableCollection<ContactVM> Contacts { get; set; } = new ObservableCollection<ContactVM>();
+        public ObservableCollection<ContactVM> Contacts { get; set; } 
+            = new ObservableCollection<ContactVM>();
 
         /// <summary>
         /// 

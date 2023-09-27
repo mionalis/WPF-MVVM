@@ -15,17 +15,17 @@ namespace ContactsApp.Model.Services
         /// <summary>
         /// Массив имен.
         /// </summary>
-        private static readonly string[] NAMES = { "Anton", "Ivan", "Alexander", "Fedor" };
+        private static readonly string[] _names = { "Anton", "Ivan", "Alexander", "Fedor" };
 
         /// <summary>
         /// Массив фамилий.
         /// </summary>
-        private static readonly string[] SURNAMES = { "Gromov", "Kuzmov", "Ivanov", "Petrov" };
+        private static readonly string[] _surnames = { "Gromov", "Kuzmov", "Ivanov", "Petrov" };
 
         /// <summary>
         /// Экземпляр класса Random.
         /// </summary>
-        private static Random random = new Random();
+        private static Random _random = new Random();
 
         /// <summary>
         /// Генерирует фамилию и имя контакта. Выходной формат: "Ivanov Ivan".
@@ -33,8 +33,8 @@ namespace ContactsApp.Model.Services
         /// <returns>Строка с фамилией и именем контакта.</returns>
         private static string GenerateFullName()
         {
-            var name = NAMES[random.Next(NAMES.Length)];
-            var surname = SURNAMES[random.Next(SURNAMES.Length)];
+            var name = _names[_random.Next(_names.Length)];
+            var surname = _surnames[_random.Next(_surnames.Length)];
 
             return $"{surname} {name}";
         }
