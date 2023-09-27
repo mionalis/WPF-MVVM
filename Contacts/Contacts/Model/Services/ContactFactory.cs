@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ContactsApp.Model;
 
-namespace Contacts.Model.Services
+namespace ContactsApp.Model.Services
 {
     /// <summary>
     /// Генерирует случайный телефонный контакт.
@@ -43,7 +43,7 @@ namespace Contacts.Model.Services
         /// Генерирует телефонный контакт.
         /// </summary>
         /// <returns>Телефонный контакт.</returns>
-        public static Contact GenerateCustomer()
+        public static Contact GenerateContact()
         {
             var contact = new Contact();
             contact.FullName = GenerateFullName();

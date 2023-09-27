@@ -1,9 +1,8 @@
-﻿<Window x:Class="Contacts.MainWindow"
+﻿<Window x:Class="ContactsApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Contacts"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodel="clr-namespace:ContactsApp.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -23,7 +22,8 @@
                     Width="75" 
                     Margin="3"
                     Content="Add"
-                    VerticalAlignment="Bottom"/>
+                    VerticalAlignment="Bottom"
+                    Command="{Binding Path=AddContactCommand}"/>
                 <Button
                     Height="25" 
                     Width="75"
@@ -38,7 +38,8 @@
                     VerticalAlignment="Bottom"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top" LastChildFill="true">
-                <ListBox Margin="3"/>
+                <ListBox Margin="3" DisplayMemberPath="FullName"
+                         ItemsSource="{Binding Path=Contacts}"/>
             </DockPanel>
         </DockPanel>
         <GridSplitter 
@@ -57,7 +58,10 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="1">
                 <TextBlock Text="Name:" Margin="3"/>
-                <TextBox Margin="3"/>
+                <TextBox
+                    Margin="3" 
+                    Text="{Binding Path=CurrentContact.FullName,
+                    UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="PhoneNumber:" Margin="3"/>
                 <TextBox Margin="3"/>
                 <TextBlock Text="Email:" Margin="3"/>
@@ -71,7 +75,8 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Margin="3, 6"
-                Content="Apply"/>
+                Content="Apply"
+                Command="{Binding Path=ApplyContactCommand}"/>
             <Image 
                 Grid.Row="0" 
                 Grid.Column="0" 
