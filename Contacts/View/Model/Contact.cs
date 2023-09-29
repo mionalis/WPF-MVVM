@@ -55,7 +55,11 @@ namespace View.Model
 
             set 
             {
-                _fullName = ValueValidator.AssertStringOnLength(value, 100, nameof(FullName)); 
+                var maxFullNameLength = 100;
+                _fullName = ValueValidator.AssertStringOnLength(
+                    value,
+                    maxFullNameLength, 
+                    nameof(FullName)); 
             }
         }
 
@@ -70,7 +74,11 @@ namespace View.Model
 
             set
             {
-                _phoneNumber = ValueValidator.AssertStringOnLength(value, 11, nameof(FullName));
+                var maxPhoneNumberLength = 11;
+                _phoneNumber = ValueValidator.AssertStringOnLength(
+                    value, 
+                    maxPhoneNumberLength, 
+                    nameof(FullName));
             }
         }
     }
