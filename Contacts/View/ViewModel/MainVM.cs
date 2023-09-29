@@ -14,22 +14,28 @@ namespace View.ViewModel
     internal class MainVM 
     {
         /// <summary>
-        /// 
+        /// Команда создания контакта.
         /// </summary>
         private RelayCommand _addContactCommand;
 
+        /// <summary>
+        /// Команда принятия изменений.
+        /// </summary>
         private RelayCommand _applyContactCommand;
 
         /// <summary>
-        /// Возвращает и задает контакт: экземпляр класса Contact. 
+        /// Возвращает и задает текущий контакт.
         /// </summary>
         public ContactVM CurrentContact { get; set; } 
 
+        /// <summary>
+        /// Возвращает и задает список контактов.
+        /// </summary>
         public ObservableCollection<ContactVM> Contacts { get; set; } 
             = new ObservableCollection<ContactVM>();
 
         /// <summary>
-        /// 
+        /// Возвращает команду, описывающую создание контакта.
         /// </summary>
         public RelayCommand AddContactCommand
         {
@@ -44,6 +50,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Возвращает команду, описывающую принятие изменений и добавление контакта в список.
+        /// </summary>
         public RelayCommand ApplyContactCommand
         {
             get

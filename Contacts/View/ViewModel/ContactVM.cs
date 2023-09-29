@@ -11,6 +11,10 @@ namespace View.ViewModel
 {
     internal class ContactVM : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ContactVM"/>.
+        /// </summary>
+        /// <param name="contact">Контакт.</param>
         public ContactVM(Contact contact)
         {
             Contact = contact;

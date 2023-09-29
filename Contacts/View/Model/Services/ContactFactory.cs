@@ -22,7 +22,10 @@ namespace View.Model.Services
         /// </summary>
         private static readonly string[] _surnames = { "Gromov", "Kuzmov", "Ivanov", "Petrov" };
 
-        private static readonly string[] _emailDomains =
+        /// <summary>
+        /// Массив почтовых доменов.
+        /// </summary>
+        private static readonly string[] _emailDomains = 
             { "gmail.com", "mail.ru", "yahoo.com", "yandex.ru"};
 
         /// <summary>
@@ -42,6 +45,10 @@ namespace View.Model.Services
             return $"{surname} {name}";
         }
 
+        /// <summary>
+        /// Генерирует телефонный номер контакта. Выходной формат: "89001002233".
+        /// </summary>
+        /// <returns>Телефонный номер контакта.</returns>
         private static string GeneratePhoneNumber()
         {
             var phoneCode = _random.Next(900, 999);
@@ -50,6 +57,10 @@ namespace View.Model.Services
             return $"8{phoneCode}{numbers}";
         }
 
+        /// <summary>
+        /// Генерирует почтовый адрес контакта. 
+        /// </summary>
+        /// <returns>Почтовый адрес контакта.</returns>
         private static string GenerateEmail()
         {
             var surname = _surnames[_random.Next(_surnames.Length)];
