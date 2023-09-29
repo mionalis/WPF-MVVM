@@ -1,5 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using View.Model.Services;
+using View.ViewModel;
 using View.Model;
 using View.Model.Services;
 
@@ -8,107 +11,49 @@ namespace View.ViewModel
     /// <summary>
     /// Реализует ViewModel для главного окна.
     /// </summary>
-    internal class MainVM : INotifyPropertyChanged
+    internal class MainVM 
     {
         /// <summary>
-        /// Команда сохранения контакта в файл.
+        /// 
         /// </summary>
-        private RelayCommand _saveCommand;
+        private RelayCommand _addContactCommand;
 
-        /// <summary>
-        /// Команда загрузки сохраненного контакта из файла.
-        /// </summary>
-        private RelayCommand _loadCommand;
+        private RelayCommand _applyContactCommand;
 
         /// <summary>
         /// Возвращает и задает контакт: экземпляр класса Contact. 
         /// </summary>
-        public Contact Contact { get; set; } = new Contact();
+        public ContactVM CurrentContact { get; set; } 
+
+        public ObservableCollection<ContactVM> Contacts { get; set; } 
+            = new ObservableCollection<ContactVM>();
 
         /// <summary>
-        /// Возвращает команду сохранения контакта в файл.
+        /// 
         /// </summary>
-        public RelayCommand SaveCommand
+        public RelayCommand AddContactCommand
         {
             get
             {
-                return _saveCommand ??
-                       (_saveCommand = new RelayCommand(obj =>
+                return _addContactCommand ??
+                       (_addContactCommand = new RelayCommand(obj =>
                        {
-                           ContactSerializer.Save(Contact);
+                           var contact = new ContactVM(ContactFactory.GenerateContact());
+                           CurrentContact = contact;
                        }));
             }
         }
 
-        /// <summary>
-        /// Возвращает команду загрузки сохраненного контакта из файла.
-        /// </summary>
-        public RelayCommand LoadCommand
+        public RelayCommand ApplyContactCommand
         {
             get
             {
-                return _loadCommand ??
-                       (_loadCommand = new RelayCommand(obj =>
+                return _applyContactCommand ??
+                       (_applyContactCommand = new RelayCommand(obj =>
                        {
-                           var contact = ContactSerializer.Load();
-                           FullName = contact.FullName;
-                           Email = contact.Email;
-                           PhoneNumber = contact.PhoneNumber;
+                           Contacts.Add(CurrentContact);
                        }));
             }
-        }
-
-        /// <summary>
-        /// Возвращает и задает фамилию и имя контакта. Формат ввода: "Ivanov Ivan".
-        /// </summary>
-        public string FullName
-        {
-            get => Contact.FullName;
-            set
-            {
-                Contact.FullName = value;
-                OnPropertyChanged(nameof(FullName));
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает телефонный номер контакта. Формат ввода: "89001002233".
-        /// </summary>
-        public string PhoneNumber
-        {
-            get => Contact.PhoneNumber;
-            set
-            {
-                Contact.PhoneNumber = value;
-                OnPropertyChanged(nameof(PhoneNumber));
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает электронную почту контакта.
-        /// </summary>
-        public string Email
-        {
-            get => Contact.Email;
-            set
-            {
-                Contact.Email = value;
-                OnPropertyChanged(nameof(Email));
-            }
-        }
-
-        /// <summary>
-        /// Срабатывает, когда объект класса изменяет значение свойства.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Вызывает событие PropertyChanged при изменении свойства.
-        /// </summary>
-        /// <param name="prop"></param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
