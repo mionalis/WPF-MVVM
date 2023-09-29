@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View" xmlns:viewmodel="clr-namespace:View.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
-        Title="Contacts" Height="483" Width="734">
+        Title="Contacts" SizeToContent="WidthAndHeight" MinHeight="300" MinWidth="370">
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,27 +18,59 @@
         <GroupBox Grid.Row="0" Grid.Column="0" Header="Edit Contact">
             <StackPanel>
                 <TextBlock Text="Name:" Margin="3"/>
-                <TextBox Margin="3" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox 
+                    Margin="3" 
+                    Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="PhoneNumber:" Margin="3"/>
-                <TextBox Margin="3" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox 
+                    Margin="3"
+                    Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="Email:" Margin="3"/>
-                <TextBox Margin="3" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox 
+                    Margin="3" 
+                    Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Row="0" Grid.Column="1" Header="Read Contact">
             <StackPanel>
                 <TextBlock Text="Name:" Margin="3"/>
-                <TextBlock Margin="3" FontWeight="Bold" Height="17.96" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock 
+                    Margin="4" 
+                    FontWeight="Bold"
+                    Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="PhoneNumber:" Margin="3"/>
-                <TextBlock Margin="3" FontWeight="Bold" Height="17.96" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock 
+                    Margin="4" 
+                    FontWeight="Bold"
+                    Text="{Binding 
+                    PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="Email:" Margin="3"/>
-                <TextBlock Margin="3" FontWeight="Bold" Height="17.96" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock 
+                    Margin="4" 
+                    FontWeight="Bold"
+                    Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </GroupBox>
-        <StackPanel Grid.Row="1" Grid.Column="1"
-                    Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Load" Margin="3" Width="75" Height="25" Command="{Binding LoadCommand}"/>
-            <Button Content="Save" Margin="3" Width="75" Height="25" Command="{Binding SaveCommand}"/>
-        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button 
+                Grid.Column="0" 
+                HorizontalAlignment="Right" 
+                Content="Load" 
+                Margin="3"
+                Width="75"
+                Height="25"
+                Command="{Binding LoadCommand}"/>
+            <Button 
+                Grid.Column="1"
+                Content="Save"
+                Margin="3"
+                Width="75"
+                Height="25" 
+                Command="{Binding SaveCommand}"/>
+        </Grid>
     </Grid>
 </Window>
