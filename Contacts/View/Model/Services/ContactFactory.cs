@@ -22,6 +22,9 @@ namespace View.Model.Services
         /// </summary>
         private static readonly string[] _surnames = { "Gromov", "Kuzmov", "Ivanov", "Petrov" };
 
+        private static readonly string[] _emailDomains =
+            { "gmail.com", "mail.ru", "yahoo.com", "yandex.ru"};
+
         /// <summary>
         /// Экземпляр класса Random.
         /// </summary>
@@ -39,6 +42,23 @@ namespace View.Model.Services
             return $"{surname} {name}";
         }
 
+        private static string GeneratePhoneNumber()
+        {
+            var phoneCode = _random.Next(900, 999);
+            var numbers = _random.Next(1000000, 9999999);
+
+            return $"8{phoneCode}{numbers}";
+        }
+
+        private static string GenerateEmail()
+        {
+            var surname = _surnames[_random.Next(_surnames.Length)];
+            var numbers = _random.Next(1000, 99999);
+            var emailDomain = _emailDomains[_random.Next(_emailDomains.Length)];
+
+            return $"{surname}{numbers}@{emailDomain}";
+        }
+
         /// <summary>
         /// Генерирует телефонный контакт.
         /// </summary>
@@ -47,6 +67,8 @@ namespace View.Model.Services
         {
             var contact = new Contact();
             contact.FullName = GenerateFullName();
+            contact.PhoneNumber = GeneratePhoneNumber();
+            contact.Email = GenerateEmail();
 
             return contact;
         }
