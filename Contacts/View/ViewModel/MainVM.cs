@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
 
 namespace View.ViewModel
 {
@@ -23,6 +24,7 @@ namespace View.ViewModel
             AddContactCommand = new RelayCommand(AddContact);
             ApplyContactCommand = new RelayCommand(ApplyContact);
             EditContactCommand = new RelayCommand(EditContact);
+            RemoveContactCommand = new RelayCommand(RemoveContact);
         }
 
         private ContactVM _currentContact;
@@ -63,6 +65,8 @@ namespace View.ViewModel
 
         public ICommand ApplyContactCommand { get; }
 
+        public ICommand RemoveContactCommand { get; }
+
         /// <summary>
         /// Возвращает и задает текущий контакт.
         /// </summary>
@@ -98,6 +102,16 @@ namespace View.ViewModel
             CurrentContact = (ContactVM)ContactClone.Clone();
             IsVisible = true;
             IsReadOnly = false;
+        }
+
+        public void RemoveContact()
+        {
+            if (CurrentContact == null)
+            {
+                return;
+            }
+
+            Contacts.RemoveAt(CurrentContactIndex);
         }
 
         public void ApplyContact()

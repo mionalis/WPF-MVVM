@@ -41,7 +41,8 @@
                     Width="75"
                     Margin="3" 
                     Content="Remove"
-                    VerticalAlignment="Bottom"/>
+                    VerticalAlignment="Bottom"
+                    Command="{Binding Path=RemoveContactCommand}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top" LastChildFill="true">
                 <ListBox Margin="3" DisplayMemberPath="FullName"
