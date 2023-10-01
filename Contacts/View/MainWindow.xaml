@@ -66,17 +66,20 @@
                 <TextBlock Text="Name:" Margin="3"/>
                 <TextBox
                     Margin="3" 
-                    Text="{Binding Path=CurrentContact.FullName, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding Path=CurrentContact.FullName, UpdateSourceTrigger=PropertyChanged}"
+                    IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="PhoneNumber:" Margin="3"/>
                 <TextBox 
                     Margin="3"
                     Text="{Binding Path=CurrentContact.PhoneNumber,
-                    UpdateSourceTrigger=PropertyChanged}"/>
+                    UpdateSourceTrigger=PropertyChanged}"
+                    IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="Email:" Margin="3"/>
                 <TextBox 
                     Margin="3"
                     Text="{Binding Path=CurrentContact.Email,
-                    UpdateSourceTrigger=PropertyChanged}"/>
+                    UpdateSourceTrigger=PropertyChanged}"
+                    IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <Button 
                 Grid.Row="1"
@@ -88,7 +91,7 @@
                 Margin="3, 6"
                 Content="Apply"
                 Command="{Binding Path=ApplyContactCommand}"
-                Visibility="{Binding IsVisible, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource VisibilityConverter}}"/>
+                Visibility="{Binding isVisible, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource VisibilityConverter}}"/>
             <Image 
                 Grid.Row="0" 
                 Grid.Column="0" 

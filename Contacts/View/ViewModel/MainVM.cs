@@ -23,6 +23,30 @@ namespace View.ViewModel
 
         private ContactVM _currentContact;
 
+        private bool _isVisible;
+
+        private bool _isReadOnly;
+
+        public bool isVisible
+        {
+            get => _isVisible;
+            set
+            {
+                _isVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsReadOnly
+        {
+            get => _isReadOnly;
+            set
+            {
+                _isReadOnly = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand AddContactCommand { get; }
 
         public ICommand ApplyContactCommand { get; }
@@ -48,13 +72,19 @@ namespace View.ViewModel
 
         public void AddContact()
         {
+            CurrentContact = null;
             var contact = new ContactVM(ContactFactory.GenerateContact());
             CurrentContact = contact;
+            isVisible = true;
+            IsReadOnly = false;
         }
 
         public void ApplyContact()
         {
             Contacts.Add(CurrentContact);
+            CurrentContact = null;
+            isVisible = false;
+            IsReadOnly = true;
         }
     }
 }
