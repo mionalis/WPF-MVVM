@@ -4,65 +4,58 @@ using System.Runtime.CompilerServices;
 using View.Model.Services;
 using View.ViewModel;
 using View.Model;
-using View.Model.Services;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Windows.Input;
 
 namespace View.ViewModel
 {
     /// <summary>
     /// Реализует ViewModel для главного окна.
     /// </summary>
-    internal class MainVM 
+    internal class MainVM : ObservableObject
     {
-        /// <summary>
-        /// Команда создания контакта.
-        /// </summary>
-        private RelayCommand _addContactCommand;
+        public MainVM()
+        {
+            AddContactCommand = new RelayCommand(AddContact);
+            ApplyContactCommand = new RelayCommand(ApplyContact);
+        }
 
-        /// <summary>
-        /// Команда принятия изменений.
-        /// </summary>
-        private RelayCommand _applyContactCommand;
+        private ContactVM _currentContact;
+
+        public ICommand AddContactCommand { get; }
+
+        public ICommand ApplyContactCommand { get; }
 
         /// <summary>
         /// Возвращает и задает текущий контакт.
         /// </summary>
-        public ContactVM CurrentContact { get; set; } 
+        public ContactVM CurrentContact
+        {
+            get => _currentContact;
+            set
+            {
+                _currentContact = value;
+                OnPropertyChanged();
+            }
+        } 
 
         /// <summary>
         /// Возвращает и задает список контактов.
         /// </summary>
-        public ObservableCollection<ContactVM> Contacts { get; set; } 
+        public ObservableCollection<ContactVM> Contacts { get; set; }
             = new ObservableCollection<ContactVM>();
 
-        /// <summary>
-        /// Возвращает команду, описывающую создание контакта.
-        /// </summary>
-        public RelayCommand AddContactCommand
+        public void AddContact()
         {
-            get
-            {
-                return _addContactCommand ??
-                       (_addContactCommand = new RelayCommand(obj =>
-                       {
-                           var contact = new ContactVM(ContactFactory.GenerateContact());
-                           CurrentContact = contact;
-                       }));
-            }
+            var contact = new ContactVM(ContactFactory.GenerateContact());
+            CurrentContact = contact;
         }
 
-        /// <summary>
-        /// Возвращает команду, описывающую принятие изменений и добавление контакта в список.
-        /// </summary>
-        public RelayCommand ApplyContactCommand
+        public void ApplyContact()
         {
-            get
-            {
-                return _applyContactCommand ??
-                       (_applyContactCommand = new RelayCommand(obj =>
-                       {
-                           Contacts.Add(CurrentContact);
-                       }));
-            }
+            Contacts.Add(CurrentContact);
         }
     }
 }
+

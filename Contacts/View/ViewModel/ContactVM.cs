@@ -20,6 +20,10 @@ namespace View.ViewModel
             Contact = contact;
         }
 
+        public ContactVM()
+        {
+        }
+
         /// <summary>
         /// Возвращает и задает контакт: экземпляр класса Contact. 
         /// </summary>
