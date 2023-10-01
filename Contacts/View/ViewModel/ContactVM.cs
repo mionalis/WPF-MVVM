@@ -78,6 +78,10 @@ namespace View.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
+        /// <summary>
+        /// Создает копию объекта класса.
+        /// </summary>
+        /// <returns>Копия объекта.</returns>
         public object Clone()
         {
             var contactClone = (Contact)Contact.Clone();

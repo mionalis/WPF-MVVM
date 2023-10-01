@@ -81,6 +81,10 @@ namespace View.Model
             }
         }
 
+        /// <summary>
+        /// Создает копию объекта класса.
+        /// </summary>
+        /// <returns>Копия объекта.</returns>
         public object Clone()
         {
             return new Contact(FullName, Email, PhoneNumber);

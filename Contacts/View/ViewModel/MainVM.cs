@@ -11,6 +11,9 @@ namespace View.ViewModel
     /// </summary>
     internal class MainVM : ObservableObject
     {
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="MainVM"/>.
+        /// </summary>
         public MainVM()
         {
             Contacts = ContactSerializer.Load() ?? new ObservableCollection<ContactVM>();
@@ -21,33 +24,69 @@ namespace View.ViewModel
             RemoveContactCommand = new RelayCommand(RemoveContact);
         }
 
+        /// <summary>
+        /// Текущий контакт.
+        /// </summary>
         private ContactVM _currentContact;
 
+        /// <summary>
+        /// Видимость объекта.
+        /// </summary>
         private bool _isVisible;
 
+        /// <summary>
+        /// Доступность редактирования текстового поля.
+        /// </summary>
         private bool _isReadOnly;
 
+        /// <summary>
+        /// Доступность объекта.
+        /// </summary>
         private bool _isEnabled;
 
+        /// <summary>
+        /// Возвращает и задает индекс текущего контакта в списке <see cref="Contacts"/>.
+        /// </summary>
         private int CurrentContactIndex { get; set; }
 
+        /// <summary>
+        /// Возвращает и задает копию объекта класса <see cref="ContactVM"/>.
+        /// </summary>
         private ContactVM ContactClone { get; set; }
 
+        /// <summary>
+        /// Возвращает команду создания контакта.
+        /// </summary>
         public ICommand AddContactCommand { get; }
 
+        /// <summary>
+        /// Возвращает команду редактирования контакта.
+        /// </summary>
         public ICommand EditContactCommand { get; }
 
-        public ICommand ApplyContactCommand { get; }
-
+        /// <summary>
+        /// Возвращает команду удаления контакта из списка.
+        /// </summary>
         public ICommand RemoveContactCommand { get; }
 
-        public bool IsEdit { get; set; }
+        /// <summary>
+        /// Возвращает команду добавления контакта в список.
+        /// </summary>
+        public ICommand ApplyContactCommand { get; }
+
+        /// <summary>
+        /// Возвращает и задает доступ к редактированию контакта.
+        /// </summary>
+        public bool IsEdit { get; private set; }
 
         /// <summary>
         /// Возвращает и задает список контактов.
         /// </summary>
         public ObservableCollection<ContactVM> Contacts { get; set; }
 
+        /// <summary>
+        /// Возвращает и задает доступность объекта.
+        /// </summary>
         public bool IsEnabled
         {
             get => _isEnabled;
@@ -58,6 +97,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Возвращает и задает видимость объекта.
+        /// </summary>
         public bool IsVisible
         {
             get => _isVisible;
@@ -68,6 +110,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Возвращает и задает доступ к редактированию объекта.
+        /// </summary>
         public bool IsReadOnly
         {
             get => _isReadOnly;
@@ -103,6 +148,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Описывает команду создания контакта.
+        /// </summary>
         public void AddContact()
         {
             var contact = new ContactVM(ContactFactory.GenerateContact());
@@ -110,6 +158,9 @@ namespace View.ViewModel
             EnableEditMode();
         }
 
+        /// <summary>
+        /// Описывает команду редактирования контакта.
+        /// </summary>
         public void EditContact()
         {
             IsEdit = true;
@@ -118,6 +169,9 @@ namespace View.ViewModel
             EnableEditMode();
         }
 
+        /// <summary>
+        /// Описывает команду удаления контакта.
+        /// </summary>
         public void RemoveContact()
         {
             if (CurrentContact == null)
@@ -131,6 +185,9 @@ namespace View.ViewModel
             ContactSerializer.Save(Contacts);
         }
 
+        /// <summary>
+        /// Описывает команду принятия изменений и добавления контакта в список.
+        /// </summary>
         public void ApplyContact()
         {
             if (IsEdit)
@@ -151,6 +208,10 @@ namespace View.ViewModel
             ContactSerializer.Save(Contacts);
         }
 
+        /// <summary>
+        /// Переводит приложение в режим редактирования (выключает кнопки Edit и Remove,
+        /// выводит текстовые поля из режима чтения, показывает кнопку Apply).
+        /// </summary>
         private void EnableEditMode()
         {
             IsVisible = true;
@@ -158,6 +219,10 @@ namespace View.ViewModel
             IsEnabled = false;
         }
 
+        /// <summary>
+        /// Переводит приложение в режим чтения (скрывает кнопку Apply, переводит текстовые поля
+        /// в режим чтения, выключает кнопки Edit и Remove). 
+        /// </summary>
         private void EnableReadMode()
         {
             IsVisible = false;
