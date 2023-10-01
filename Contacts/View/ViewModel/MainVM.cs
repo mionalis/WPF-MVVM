@@ -13,6 +13,8 @@ namespace View.ViewModel
     {
         public MainVM()
         {
+            Contacts = ContactSerializer.Load() ?? new ObservableCollection<ContactVM>();
+
             AddContactCommand = new RelayCommand(AddContact);
             ApplyContactCommand = new RelayCommand(ApplyContact);
             EditContactCommand = new RelayCommand(EditContact);
@@ -45,7 +47,6 @@ namespace View.ViewModel
         /// Возвращает и задает список контактов.
         /// </summary>
         public ObservableCollection<ContactVM> Contacts { get; set; }
-            = new ObservableCollection<ContactVM>();
 
         public bool IsEnabled
         {
@@ -87,7 +88,7 @@ namespace View.ViewModel
             {
                 _currentContact = value;
 
-                if (_currentContact != null && Contacts.IndexOf(_currentContact) != -1)
+                if (_currentContact != null && Contacts != null && Contacts.IndexOf(_currentContact) != -1)
                 {
                     IsEnabled = true;
                     CurrentContactIndex = Contacts.IndexOf(_currentContact);
@@ -126,6 +127,8 @@ namespace View.ViewModel
 
             Contacts.RemoveAt(CurrentContactIndex);
             IsEnabled = false;
+
+            ContactSerializer.Save(Contacts);
         }
 
         public void ApplyContact()
@@ -147,6 +150,8 @@ namespace View.ViewModel
             IsReadOnly = true;
             IsEdit = false;
             IsEnabled = false;
+
+            ContactSerializer.Save(Contacts);
         }
     }
 }

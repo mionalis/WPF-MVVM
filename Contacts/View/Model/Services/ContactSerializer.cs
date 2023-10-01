@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
+using View.ViewModel;
 
 namespace View.Model.Services
 {
@@ -16,30 +18,36 @@ namespace View.Model.Services
             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\contacts.json";
 
         /// <summary>
-        /// Сохраняет объект контакта в файл по заданному пути.
+        /// Сохраняет список контактов в файл по заданному пути.
         /// </summary>
-        /// <param name="contact">Контакт.</param>
-        public static void Save(Contact contact)
+        /// <param name="contacts">Список контактов.</param>
+        public static void Save(ObservableCollection<ContactVM> contacts)
         {
-            var json = JsonConvert.SerializeObject(contact, Formatting.Indented);
-            File.WriteAllText(Path, json);
+            var serializedItems = JsonConvert.SerializeObject(contacts);
+            File.WriteAllText(Path, serializedItems);
         }
 
         /// <summary>
-        /// Выполняет загрузку объекта контакта из файла по заданному пути. 
+        /// Выполняет загрузку списка контактов из файла по заданному пути. 
         /// </summary>
-        /// <returns> Объект контакта.</returns>
-        public static Contact Load()
+        /// <returns> Список контактов.</returns>
+        public static ObservableCollection<ContactVM> Load()
         {
-            var contact = new Contact();
+            var contacts = new ObservableCollection<ContactVM>();
 
-            if (File.Exists(Path))
+            if (!File.Exists(Path))
             {
-                var jsonFileContents = File.ReadAllText(Path);
-                contact = JsonConvert.DeserializeObject<Contact>(jsonFileContents);
+                return contacts;
             }
 
-            return contact;
+            using (var streamReader = new StreamReader(Path))
+            {
+                var readContacts = streamReader.ReadToEnd();
+                contacts = 
+                    JsonConvert.DeserializeObject<ObservableCollection<ContactVM>>(readContacts);
+            }
+
+            return contacts;
         }
     }
 }
