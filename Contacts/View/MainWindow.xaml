@@ -35,7 +35,8 @@
                     Margin="3"
                     Content="Edit" 
                     VerticalAlignment="Bottom"
-                    Command="{Binding Path=EditContactCommand}"/>
+                    Command="{Binding Path=EditContactCommand}"
+                    IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button 
                     Height="25"
                     Width="75"

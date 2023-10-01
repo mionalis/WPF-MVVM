@@ -33,11 +33,23 @@ namespace View.ViewModel
 
         private bool _isReadOnly;
 
+        private bool _isEnabled;
+
         private int CurrentContactIndex { get; set; }
 
         private ContactVM ContactClone { get; set; }
 
-        private bool IsEdit { get; set; }
+        public bool IsEdit { get; set; }
+
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set
+            {
+                _isEnabled = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool IsVisible
         {
@@ -76,6 +88,15 @@ namespace View.ViewModel
             set
             {
                 _currentContact = value;
+
+                if (_currentContact != null && Contacts.IndexOf(_currentContact) != -1)
+                {
+                    IsEnabled = true;
+                    CurrentContactIndex = Contacts.IndexOf(_currentContact);
+                }
+
+                IsVisible = false;
+                IsReadOnly = true;
                 OnPropertyChanged();
             }
         } 
@@ -88,11 +109,11 @@ namespace View.ViewModel
 
         public void AddContact()
         {
-            CurrentContact = null;
             var contact = new ContactVM(ContactFactory.GenerateContact());
             CurrentContact = contact;
             IsVisible = true;
             IsReadOnly = false;
+            IsEnabled = false;
         }
 
         public void EditContact()
@@ -112,6 +133,7 @@ namespace View.ViewModel
             }
 
             Contacts.RemoveAt(CurrentContactIndex);
+            IsEnabled = false;
         }
 
         public void ApplyContact()
@@ -120,6 +142,7 @@ namespace View.ViewModel
             {
                 Contacts[CurrentContactIndex] = CurrentContact;
                 ContactClone = null;
+                CurrentContact = null;
                 IsEdit = false;
             }
             else
@@ -127,9 +150,10 @@ namespace View.ViewModel
                 Contacts.Add(CurrentContact);
                 CurrentContactIndex = Contacts.IndexOf(CurrentContact);
                 CurrentContact = null;
-                IsEdit = false;
                 IsVisible = false;
                 IsReadOnly = true;
+                IsEdit = false;
+                IsEnabled = false;
             }
         }
     }
