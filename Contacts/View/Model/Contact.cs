@@ -6,7 +6,7 @@ namespace View.Model
     /// <summary>
     /// Хранит информацию контакта телефонной книги.
     /// </summary>
-    internal class Contact
+    internal class Contact : ICloneable
     {
         /// <summary>
         /// Фамилия и имя контакта. Формат ввода: "Ivanov Ivan".
@@ -80,6 +80,11 @@ namespace View.Model
                     maxPhoneNumberLength, 
                     nameof(FullName));
             }
+        }
+
+        public object Clone()
+        {
+            return new Contact(FullName, Email, PhoneNumber);
         }
     }
 }

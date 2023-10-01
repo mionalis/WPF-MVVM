@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace View.ViewModel
 {
-    internal class ContactVM : INotifyPropertyChanged
+    internal class ContactVM : INotifyPropertyChanged, ICloneable
     {
         /// <summary>
         /// Создаёт экземпляр класса <see cref="ContactVM"/>.
@@ -80,6 +80,12 @@ namespace View.ViewModel
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        public object Clone()
+        {
+            var contactClone = (Contact)Contact.Clone();
+            return new ContactVM(contactClone);
         }
     }
 }

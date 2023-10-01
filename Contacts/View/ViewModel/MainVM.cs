@@ -7,6 +7,9 @@ using View.Model;
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json.Linq;
 
 namespace View.ViewModel
 {
@@ -19,6 +22,7 @@ namespace View.ViewModel
         {
             AddContactCommand = new RelayCommand(AddContact);
             ApplyContactCommand = new RelayCommand(ApplyContact);
+            EditContactCommand = new RelayCommand(EditContact);
         }
 
         private ContactVM _currentContact;
@@ -27,7 +31,13 @@ namespace View.ViewModel
 
         private bool _isReadOnly;
 
-        public bool isVisible
+        private int CurrentContactIndex { get; set; }
+
+        private ContactVM ContactClone { get; set; }
+
+        private bool IsEdit { get; set; }
+
+        public bool IsVisible
         {
             get => _isVisible;
             set
@@ -48,6 +58,8 @@ namespace View.ViewModel
         }
 
         public ICommand AddContactCommand { get; }
+
+        public ICommand EditContactCommand { get; }
 
         public ICommand ApplyContactCommand { get; }
 
@@ -75,16 +87,36 @@ namespace View.ViewModel
             CurrentContact = null;
             var contact = new ContactVM(ContactFactory.GenerateContact());
             CurrentContact = contact;
-            isVisible = true;
+            IsVisible = true;
+            IsReadOnly = false;
+        }
+
+        public void EditContact()
+        {
+            IsEdit = true;
+            ContactClone = CurrentContact;
+            CurrentContact = (ContactVM)ContactClone.Clone();
+            IsVisible = true;
             IsReadOnly = false;
         }
 
         public void ApplyContact()
         {
-            Contacts.Add(CurrentContact);
-            CurrentContact = null;
-            isVisible = false;
-            IsReadOnly = true;
+            if (IsEdit)
+            {
+                Contacts[CurrentContactIndex] = CurrentContact;
+                ContactClone = null;
+                IsEdit = false;
+            }
+            else
+            {
+                Contacts.Add(CurrentContact);
+                CurrentContactIndex = Contacts.IndexOf(CurrentContact);
+                CurrentContact = null;
+                IsEdit = false;
+                IsVisible = false;
+                IsReadOnly = true;
+            }
         }
     }
 }
