@@ -1,16 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using View.Model.Services;
-using View.ViewModel;
-using View.Model;
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Reflection;
+using View.Model.Services;
 
 namespace View.ViewModel
 {
@@ -39,7 +31,21 @@ namespace View.ViewModel
 
         private ContactVM ContactClone { get; set; }
 
+        public ICommand AddContactCommand { get; }
+
+        public ICommand EditContactCommand { get; }
+
+        public ICommand ApplyContactCommand { get; }
+
+        public ICommand RemoveContactCommand { get; }
+
         public bool IsEdit { get; set; }
+
+        /// <summary>
+        /// Возвращает и задает список контактов.
+        /// </summary>
+        public ObservableCollection<ContactVM> Contacts { get; set; }
+            = new ObservableCollection<ContactVM>();
 
         public bool IsEnabled
         {
@@ -71,14 +77,6 @@ namespace View.ViewModel
             }
         }
 
-        public ICommand AddContactCommand { get; }
-
-        public ICommand EditContactCommand { get; }
-
-        public ICommand ApplyContactCommand { get; }
-
-        public ICommand RemoveContactCommand { get; }
-
         /// <summary>
         /// Возвращает и задает текущий контакт.
         /// </summary>
@@ -99,13 +97,7 @@ namespace View.ViewModel
                 IsReadOnly = true;
                 OnPropertyChanged();
             }
-        } 
-
-        /// <summary>
-        /// Возвращает и задает список контактов.
-        /// </summary>
-        public ObservableCollection<ContactVM> Contacts { get; set; }
-            = new ObservableCollection<ContactVM>();
+        }
 
         public void AddContact()
         {
@@ -143,18 +135,18 @@ namespace View.ViewModel
                 Contacts[CurrentContactIndex] = CurrentContact;
                 ContactClone = null;
                 CurrentContact = null;
-                IsEdit = false;
             }
             else
             {
                 Contacts.Add(CurrentContact);
                 CurrentContactIndex = Contacts.IndexOf(CurrentContact);
                 CurrentContact = null;
-                IsVisible = false;
-                IsReadOnly = true;
-                IsEdit = false;
-                IsEnabled = false;
             }
+
+            IsVisible = false;
+            IsReadOnly = true;
+            IsEdit = false;
+            IsEnabled = false;
         }
     }
 }

@@ -43,7 +43,8 @@
                     Margin="3" 
                     Content="Remove"
                     VerticalAlignment="Bottom"
-                    Command="{Binding Path=RemoveContactCommand}"/>
+                    Command="{Binding Path=RemoveContactCommand}"
+                    IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top" LastChildFill="true">
                 <ListBox Margin="3" DisplayMemberPath="FullName"
