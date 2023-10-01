@@ -36,7 +36,6 @@ namespace View.Model
         /// </summary>
         public Contact()
         {
-
         }
 
         /// <summary>

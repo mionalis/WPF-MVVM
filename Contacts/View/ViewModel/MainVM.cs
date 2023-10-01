@@ -88,7 +88,10 @@ namespace View.ViewModel
             {
                 _currentContact = value;
 
-                if (_currentContact != null && Contacts != null && Contacts.IndexOf(_currentContact) != -1)
+                if (
+                    _currentContact != null && 
+                    Contacts != null &&
+                    Contacts.IndexOf(_currentContact) != -1)
                 {
                     IsEnabled = true;
                     CurrentContactIndex = Contacts.IndexOf(_currentContact);
@@ -104,9 +107,7 @@ namespace View.ViewModel
         {
             var contact = new ContactVM(ContactFactory.GenerateContact());
             CurrentContact = contact;
-            IsVisible = true;
-            IsReadOnly = false;
-            IsEnabled = false;
+            EnableEditMode();
         }
 
         public void EditContact()
@@ -114,8 +115,7 @@ namespace View.ViewModel
             IsEdit = true;
             ContactClone = CurrentContact;
             CurrentContact = (ContactVM)ContactClone.Clone();
-            IsVisible = true;
-            IsReadOnly = false;
+            EnableEditMode();
         }
 
         public void RemoveContact()
@@ -146,12 +146,24 @@ namespace View.ViewModel
                 CurrentContact = null;
             }
 
+            EnableReadMode();
+
+            ContactSerializer.Save(Contacts);
+        }
+
+        private void EnableEditMode()
+        {
+            IsVisible = true;
+            IsReadOnly = false;
+            IsEnabled = false;
+        }
+
+        private void EnableReadMode()
+        {
             IsVisible = false;
             IsReadOnly = true;
             IsEdit = false;
             IsEnabled = false;
-
-            ContactSerializer.Save(Contacts);
         }
     }
 }

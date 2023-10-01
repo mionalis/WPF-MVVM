@@ -71,10 +71,12 @@ namespace View.Model.Services
         /// <returns>Телефонный контакт.</returns>
         public static Contact GenerateContact()
         {
-            var contact = new Contact();
-            contact.FullName = GenerateFullName();
-            contact.PhoneNumber = GeneratePhoneNumber();
-            contact.Email = GenerateEmail();
+            var contact = new Contact
+            {
+                FullName = GenerateFullName(),
+                PhoneNumber = GeneratePhoneNumber(),
+                Email = GenerateEmail()
+            };
 
             return contact;
         }
