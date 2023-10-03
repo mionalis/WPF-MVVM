@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Windows.Input;
 using View.Model.Services;
 
@@ -174,14 +175,22 @@ namespace View.ViewModel
         /// </summary>
         public void RemoveContact()
         {
-            if (CurrentContact == null)
+            Contacts.RemoveAt(CurrentContactIndex);
+
+            if (Contacts.Count == 0)
             {
-                return;
+                CurrentContact = null;
+            }
+            else if (CurrentContactIndex == Contacts.Count)
+            {
+                CurrentContact = Contacts[CurrentContactIndex - 1];
+            }
+            else
+            {
+                CurrentContact = Contacts[CurrentContactIndex];
             }
 
-            Contacts.RemoveAt(CurrentContactIndex);
             IsEnabled = false;
-
             ContactSerializer.Save(Contacts);
         }
 
