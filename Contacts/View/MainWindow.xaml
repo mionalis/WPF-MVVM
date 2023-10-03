@@ -6,7 +6,7 @@
         xmlns:view="clr-namespace:View"
         d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" MinHeight="230" MinWidth="535">
     <Window.Resources>
         <view:VisibilityConverter x:Key="VisibilityConverter" />
     </Window.Resources>
