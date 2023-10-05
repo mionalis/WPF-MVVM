@@ -2,14 +2,14 @@
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
-using View.ViewModel;
+using ViewModel.ViewModels;
 
-namespace View.Model.Services
+namespace ViewModel.Services
 {
     /// <summary>
     /// Выполняет сохранение и загрузку одного объекта контакта из файла.
     /// </summary>
-    internal static class ContactSerializer
+    public static class ContactSerializer
     {
         /// <summary>
         /// Возвращает путь файла, в котором будут храниться сериализованные данные.

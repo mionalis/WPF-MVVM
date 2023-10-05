@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using View.Model;
 
-namespace View.ViewModel
+namespace ViewModel.ViewModels
 {
-    internal class ContactVM : INotifyPropertyChanged, ICloneable
+    public class ContactVM : INotifyPropertyChanged, ICloneable
     {
         /// <summary>
         /// Создаёт экземпляр класса <see cref="ContactVM"/>.

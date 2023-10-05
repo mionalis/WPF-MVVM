@@ -1,12 +1,12 @@
 ﻿using System;
-using View.Model.Services;
+using Model.Services;
 
-namespace View.Model
+namespace Model
 {
     /// <summary>
     /// Хранит информацию контакта телефонной книги.
     /// </summary>
-    internal class Contact : ICloneable
+    public class Contact : ICloneable
     {
         /// <summary>
         /// Фамилия и имя контакта. Формат ввода: "Ivanov Ivan".

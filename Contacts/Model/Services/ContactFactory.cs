@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace View.Model.Services
+namespace Model.Services
 {
     /// <summary>
     /// Генерирует случайный телефонный контакт.
     /// </summary>
-    internal static class ContactFactory
+    public static class ContactFactory
     {
         /// <summary>
         /// Массив имен.

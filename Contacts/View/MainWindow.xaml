@@ -2,9 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodel="clr-namespace:View.ViewModel"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:View"
-        d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
+        xmlns:viewModels="clr-namespace:ViewModel.ViewModels;assembly=ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainVM}"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="230" MinWidth="535">
     <Window.Resources>

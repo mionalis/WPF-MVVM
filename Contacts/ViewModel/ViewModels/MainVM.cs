@@ -3,14 +3,15 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows.Input;
-using View.Model.Services;
+using Model.Services;
+using ViewModel.Services;
 
-namespace View.ViewModel
+namespace ViewModel.ViewModels
 {
     /// <summary>
     /// Реализует ViewModel для главного окна.
     /// </summary>
-    internal class MainVM : ObservableObject
+    public class MainVM : ObservableObject
     {
         /// <summary>
         /// Создаёт экземпляр класса <see cref="MainVM"/>.
@@ -180,6 +181,7 @@ namespace View.ViewModel
             if (Contacts.Count == 0)
             {
                 CurrentContact = null;
+                IsEnabled = false;
             }
             else if (CurrentContactIndex == Contacts.Count)
             {
@@ -190,7 +192,6 @@ namespace View.ViewModel
                 CurrentContact = Contacts[CurrentContactIndex];
             }
 
-            IsEnabled = false;
             ContactSerializer.Save(Contacts);
         }
 
