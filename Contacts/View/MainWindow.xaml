@@ -14,7 +14,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Image 
                     Source="/Resources/icon.png" 
@@ -73,7 +73,7 @@
                     IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top" LastChildFill="true">
-                <ListBox 
+                <ListBox
                     ItemTemplate="{StaticResource ContactTemplate}"
                     Margin="3"
                     ItemsSource="{Binding Path=Contacts, UpdateSourceTrigger=PropertyChanged}"
