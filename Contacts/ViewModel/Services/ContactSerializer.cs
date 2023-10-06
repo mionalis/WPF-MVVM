@@ -23,6 +23,11 @@ namespace ViewModel.Services
         /// <param name="contacts">Список контактов.</param>
         public static void Save(ObservableCollection<ContactVM> contacts)
         {
+            if (!File.Exists(Path))
+            {
+                File.Create(Path).Close();
+            }
+
             var serializedItems = JsonConvert.SerializeObject(contacts);
             File.WriteAllText(Path, serializedItems);
         }
