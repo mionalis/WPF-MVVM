@@ -10,6 +10,17 @@
         Title="MainWindow" MinHeight="230" MinWidth="535">
     <Window.Resources>
         <view:VisibilityConverter x:Key="VisibilityConverter" />
+        <DataTemplate x:Key="ContactTemplate">
+            <StackPanel Margin="3">
+                    <TextBlock
+                        FontSize="12"
+                        FontWeight="SemiBold"
+                        Text="{Binding FullName}"/>
+                    <TextBlock
+                        FontSize="10"
+                        Text="{Binding PhoneNumber}"/>
+                </StackPanel>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -48,9 +59,11 @@
                     IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top" LastChildFill="true">
-                <ListBox Margin="3" DisplayMemberPath="FullName"
-                         ItemsSource="{Binding Path=Contacts, UpdateSourceTrigger=PropertyChanged}"
-                         SelectedItem="{Binding Path=CurrentContact, UpdateSourceTrigger=PropertyChanged}"/>
+                <ListBox 
+                    ItemTemplate="{StaticResource ContactTemplate}"
+                    Margin="3"
+                    ItemsSource="{Binding Path=Contacts, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding Path=CurrentContact, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
         </DockPanel>
         <GridSplitter 
