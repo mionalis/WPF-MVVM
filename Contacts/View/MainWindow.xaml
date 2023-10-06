@@ -11,7 +11,20 @@
     <Window.Resources>
         <view:VisibilityConverter x:Key="VisibilityConverter" />
         <DataTemplate x:Key="ContactTemplate">
-            <StackPanel Margin="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image 
+                    Source="/Resources/icon.png" 
+                    Grid.Column="0" 
+                    Width="40"
+                    Height="40"
+                    Margin="3"/>
+                <StackPanel
+                    Grid.Column="1" 
+                    Margin="3">
                     <TextBlock
                         FontSize="12"
                         FontWeight="SemiBold"
@@ -20,6 +33,7 @@
                         FontSize="10"
                         Text="{Binding PhoneNumber}"/>
                 </StackPanel>
+            </Grid>
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -111,6 +125,7 @@
                 Command="{Binding Path=ApplyContactCommand}"
                 Visibility="{Binding IsVisible, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource VisibilityConverter}}"/>
             <Image 
+                Source="/Resources/icon.png" 
                 Grid.Row="0" 
                 Grid.Column="0" 
                 Width="100"
