@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:View"
         xmlns:viewModels="clr-namespace:ViewModel.ViewModels;assembly=ViewModel"
+        xmlns:uc="clr-namespace:View.Controls"
         d:DataContext="{d:DesignInstance Type=viewModels:MainVM}"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="230" MinWidth="535">
@@ -94,25 +95,15 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="1">
-                <TextBlock Text="Name:" Margin="3"/>
-                <TextBox
-                    Margin="3" 
-                    Text="{Binding Path=CurrentContact.FullName, UpdateSourceTrigger=PropertyChanged}"
-                    IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Text="PhoneNumber:" Margin="3"/>
-                <TextBox 
-                    Margin="3"
-                    Text="{Binding Path=CurrentContact.PhoneNumber,
-                    UpdateSourceTrigger=PropertyChanged}"
-                    IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Text="Email:" Margin="3"/>
-                <TextBox 
-                    Margin="3"
-                    Text="{Binding Path=CurrentContact.Email,
-                    UpdateSourceTrigger=PropertyChanged}"
-                    IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
+            <Image 
+                Source="/Resources/icon.png" 
+                Grid.Row="0" 
+                Grid.Column="0" 
+                Width="100"
+                Height="100"
+                Margin="3,25,3,3"
+                VerticalAlignment="Top"/>
+            <uc:ContactInfoControl Grid.Row="0" Grid.Column="1"/>
             <Button 
                 Grid.Row="1"
                 Grid.Column="1"
@@ -120,18 +111,11 @@
                 Height="25" 
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Margin="3, 6"
+                Margin="3, 20, 3, 3"
                 Content="Apply"
                 Command="{Binding Path=ApplyContactCommand}"
-                Visibility="{Binding IsVisible, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource VisibilityConverter}}"/>
-            <Image 
-                Source="/Resources/icon.png" 
-                Grid.Row="0" 
-                Grid.Column="0" 
-                Width="100"
-                Height="100"
-                Margin="3,25,3,0"
-                VerticalAlignment="Top"/>
+                Visibility="{Binding IsVisible, UpdateSourceTrigger=PropertyChanged,
+                    Converter={StaticResource VisibilityConverter}}"/>
         </Grid>
     </Grid>
 </Window>
