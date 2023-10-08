@@ -114,6 +114,7 @@
                 Margin="3, 20, 3, 3"
                 Content="Apply"
                 Command="{Binding Path=ApplyContactCommand}"
+                IsEnabled="{Binding CurrentContact.IsValid}"
                 Visibility="{Binding IsVisible, UpdateSourceTrigger=PropertyChanged,
                     Converter={StaticResource VisibilityConverter}}"/>
         </Grid>

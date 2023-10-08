@@ -1,5 +1,4 @@
 ﻿using System;
-using Model.Services;
 
 namespace Model
 {
@@ -8,16 +7,6 @@ namespace Model
     /// </summary>
     public class Contact : ICloneable
     {
-        /// <summary>
-        /// Фамилия и имя контакта. Формат ввода: "Ivanov Ivan".
-        /// </summary>
-        private string _fullName;
-
-        /// <summary>
-        /// Телефонный номер контакта. Формат ввода: "89001002233".
-        /// </summary>
-        private string _phoneNumber;
-
         /// <summary>
         /// Создаёт экземпляр класса <see cref="Contact"/>.
         /// </summary>
@@ -39,47 +28,19 @@ namespace Model
         }
 
         /// <summary>
+        /// Возвращает и задает фамилию и имя контакта. Формат ввода: "Ivanov Ivan".
+        /// </summary>
+        public string FullName { get; set; }
+
+        /// <summary>
+        /// Возвращает и задает телефонный номер контакта. Формат ввода: "+7 (900) 111-22-33".
+        /// </summary>
+        public string PhoneNumber { get; set; }
+
+        /// <summary>
         /// Возвращает и задает электронную почту контакта.
         /// </summary>
         public string Email { get; set; }
-
-        /// <summary>
-        /// Возвращает и задает фамилию и имя контакта. Формат ввода: "Ivanov Ivan".
-        /// </summary>
-        /// <exception cref="ArgumentException">Выбрасывается, если строка не  состоит из 
-        /// символов английского алфавита.</exception>
-        public string FullName 
-        {
-            get => _fullName;
-
-            set 
-            {
-                var maxFullNameLength = 100;
-                _fullName = ValueValidator.AssertStringOnLength(
-                    value,
-                    maxFullNameLength, 
-                    nameof(FullName)); 
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает телефонный номер контакта. Формат ввода: "89001002233".
-        /// </summary>
-        /// <exception cref="ArgumentException">Выбрасывается, если длина строки превышает 
-        /// заданное значение.</exception>
-        public string PhoneNumber 
-        {
-            get => _phoneNumber;
-
-            set
-            {
-                var maxPhoneNumberLength = 11;
-                _phoneNumber = ValueValidator.AssertStringOnLength(
-                    value, 
-                    maxPhoneNumberLength, 
-                    nameof(FullName));
-            }
-        }
 
         /// <summary>
         /// Создает копию объекта класса.

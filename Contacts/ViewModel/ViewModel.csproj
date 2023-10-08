@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Services\ContactSerializer.cs" />
+    <Compile Include="Services\ValueValidator.cs" />
     <Compile Include="ViewModels\ContactVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="App.xaml.cs">

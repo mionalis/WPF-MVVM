@@ -4,11 +4,15 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
+using Model.Services;
+using ViewModel.Services;
 
 namespace ViewModel.ViewModels
 {
     public class ContactVM : INotifyPropertyChanged, ICloneable, IDataErrorInfo
     {
+        private bool _isValid;
+
         /// <summary>
         /// Создаёт экземпляр класса <see cref="ContactVM"/>.
         /// </summary>
@@ -22,10 +26,70 @@ namespace ViewModel.ViewModels
         {
         }
 
+        public bool IsValid
+        {
+            get => _isValid;
+            set
+            {
+                _isValid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Error => null;
+
         /// <summary>
         /// Возвращает и задает контакт: экземпляр класса Contact. 
         /// </summary>
         public Contact Contact { get; set; } = new Contact();
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = null;
+                IsValid = true;
+
+                switch (columnName)
+                {
+                    case "FullName":
+                    {
+                        var maxFullNameLength = 100;
+
+                        error = ValueValidator.ValidateFullName(
+                            Contact.FullName,
+                            maxFullNameLength);
+
+                        break;
+                    }
+                    case "PhoneNumber":
+                    {
+                        var maxPhoneNumberLength = 50;
+
+                        error = ValueValidator.ValidatePhoneNumber(
+                            Contact.PhoneNumber,
+                            maxPhoneNumberLength);
+
+                        break;
+                    }
+                    case "Email":
+                    {
+                        var maxEmailLength = 100;
+
+                        error = ValueValidator.ValidateEmail(Contact.Email, maxEmailLength);
+
+                        break;
+                    }
+                }
+
+                if (error != null)
+                {
+                    IsValid = false;
+                }
+
+                return error;
+            }
+        }
 
         /// <summary>
         /// Возвращает и задает фамилию и имя контакта. Формат ввода: "Ivanov Ivan".
@@ -41,7 +105,7 @@ namespace ViewModel.ViewModels
         }
 
         /// <summary>
-        /// Возвращает и задает телефонный номер контакта. Формат ввода: "89001002233".
+        /// Возвращает и задает телефонный номер контакта. Формат ввода: "+7 (900) 111-22-33".
         /// </summary>
         public string PhoneNumber
         {
@@ -65,55 +129,6 @@ namespace ViewModel.ViewModels
                 OnPropertyChanged(nameof(Email));
             }
         }
-
-        public string this[string columnName]
-        {
-            get
-            {
-                string error = null;
-
-                switch (columnName)
-                {
-                    case "FullName":
-                    {
-                        var maxFullNameLength = 100;
-
-                        if (FullName.Length > maxFullNameLength)
-                        {
-                            error = "Error";
-                        }
-
-                        break;
-                    }
-                    case "PhoneNumber":
-                    {
-                        var pattern = @"^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$";
-
-                        if (!Regex.IsMatch(Contact.PhoneNumber, pattern))
-                        {
-                            error = "Error";
-                        }
-
-                        break;
-                    }
-                    case "Email":
-                    {
-                        var pattern = @"^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$";
-
-                        if (!Regex.IsMatch(Contact.Email, pattern))
-                        {
-                            error = "Error";
-                        }
-
-                        break;
-                    }
-                }
-
-                return error;
-            }
-        }
-
-        public string Error => null;
 
         /// <summary>
         /// Срабатывает, когда объект класса изменяет значение свойства.
