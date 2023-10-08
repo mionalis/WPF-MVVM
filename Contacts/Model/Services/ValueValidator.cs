@@ -21,7 +21,7 @@ namespace Model.Services
             int maxLength,
             string propertyName)
         {
-            if (value == null)
+           /* if (value == null)
             {
                 return value;
             }
@@ -30,7 +30,7 @@ namespace Model.Services
             {
                 throw new ArgumentException($"Invalid value in {propertyName}." +
                                             $"Maximum string length exceeded: {maxLength}.");
-            }
+            }*/
 
             return value;
         }

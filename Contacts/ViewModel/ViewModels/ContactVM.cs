@@ -2,10 +2,12 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace ViewModel.ViewModels
 {
-    public class ContactVM : INotifyPropertyChanged, ICloneable
+    public class ContactVM : INotifyPropertyChanged, ICloneable, IDataErrorInfo
     {
         /// <summary>
         /// Создаёт экземпляр класса <see cref="ContactVM"/>.
@@ -63,6 +65,55 @@ namespace ViewModel.ViewModels
                 OnPropertyChanged(nameof(Email));
             }
         }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = null;
+
+                switch (columnName)
+                {
+                    case "FullName":
+                    {
+                        var maxFullNameLength = 100;
+
+                        if (FullName.Length > maxFullNameLength)
+                        {
+                            error = "Error";
+                        }
+
+                        break;
+                    }
+                    case "PhoneNumber":
+                    {
+                        var pattern = @"^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$";
+
+                        if (!Regex.IsMatch(Contact.PhoneNumber, pattern))
+                        {
+                            error = "Error";
+                        }
+
+                        break;
+                    }
+                    case "Email":
+                    {
+                        var pattern = @"^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$";
+
+                        if (!Regex.IsMatch(Contact.Email, pattern))
+                        {
+                            error = "Error";
+                        }
+
+                        break;
+                    }
+                }
+
+                return error;
+            }
+        }
+
+        public string Error => null;
 
         /// <summary>
         /// Срабатывает, когда объект класса изменяет значение свойства.

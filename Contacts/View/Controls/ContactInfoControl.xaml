@@ -6,25 +6,59 @@
              xmlns:local="clr-namespace:View.Controls" xmlns:viewmodels="clr-namespace:ViewModel.ViewModels;assembly=ViewModel" d:DataContext="{d:DesignInstance Type=viewmodels:MainVM}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ValidationStyleOfTextBox" TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, 
+                        Path=(Validation.Errors)/ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <StackPanel>
-            <TextBlock Text="Name:" Margin="3"/>
+    <StackPanel>
+        <TextBlock Text="Name:" Margin="3"/>
             <TextBox
-                Margin="3" 
-                Text="{Binding Path=CurrentContact.FullName, UpdateSourceTrigger=PropertyChanged}"
-                IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="PhoneNumber:" Margin="3"/>
-            <TextBox 
-                Margin="3"
-                Text="{Binding Path=CurrentContact.PhoneNumber,
-            UpdateSourceTrigger=PropertyChanged}"
-                IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="Email:" Margin="3"/>
-            <TextBox 
-                Margin="3"
-                Text="{Binding Path=CurrentContact.Email,
-            UpdateSourceTrigger=PropertyChanged}"
-                IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
+            Margin="3" 
+            IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource ValidationStyleOfTextBox}">
+            <TextBox.Text>
+                <Binding Path="CurrentContact.FullName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+          </TextBox>
+        <TextBlock Text="PhoneNumber:" Margin="3"/>
+        <TextBox
+            Margin="3" 
+            IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource ValidationStyleOfTextBox}">
+            <TextBox.Text>
+                <Binding Path="CurrentContact.PhoneNumber" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Text="Email:" Margin="3"/>
+        <TextBox
+            Margin="3" 
+            IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource ValidationStyleOfTextBox}">
+            <TextBox.Text>
+                <Binding Path="CurrentContact.Email" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         </StackPanel>
-    </Grid>
+</Grid>
 </UserControl>
