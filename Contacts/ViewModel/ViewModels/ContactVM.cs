@@ -9,8 +9,14 @@ using ViewModel.Services;
 
 namespace ViewModel.ViewModels
 {
+    /// <summary>
+    /// Реализует ViewModel для класса Contact.
+    /// </summary>
     public class ContactVM : INotifyPropertyChanged, ICloneable, IDataErrorInfo
     {
+        /// <summary>
+        /// Валидность введенных данных.
+        /// </summary>
         private bool _isValid;
 
         /// <summary>
@@ -22,10 +28,16 @@ namespace ViewModel.ViewModels
             Contact = contact;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ContactVM"/>.
+        /// </summary>
         public ContactVM()
         {
         }
 
+        /// <summary>
+        /// Возвращает и задает валидность введенных данных.
+        /// </summary>
         public bool IsValid
         {
             get => _isValid;
@@ -36,6 +48,9 @@ namespace ViewModel.ViewModels
             }
         }
 
+        /// <summary>
+        /// Возвращает сообщение об ошибке, показывающее причину отказа в данном объекте.
+        /// </summary>
         public string Error => null;
 
         /// <summary>
@@ -43,6 +58,11 @@ namespace ViewModel.ViewModels
         /// </summary>
         public Contact Contact { get; set; } = new Contact();
 
+        /// <summary>
+        /// Возвращает сообщение об ошибке для свойства с заданным именем.
+        /// </summary>
+        /// <param name="columnName">Название свойства.</param>
+        /// <returns>Сообщение об ошибке.</returns>
         public string this[string columnName]
         {
             get
