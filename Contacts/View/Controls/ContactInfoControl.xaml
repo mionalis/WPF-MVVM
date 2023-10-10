@@ -9,13 +9,21 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <Style x:Key="ValidationStyleOfTextBox" TargetType="TextBox">
-            <Style.Triggers>
+                <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
                     <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, 
                         Path=(Validation.Errors)/ErrorContent}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+                    <Setter Property="Background" Value="#ffdae1"/>
+                    <Setter Property="Validation.ErrorTemplate">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                    <Border Background="Blue"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
