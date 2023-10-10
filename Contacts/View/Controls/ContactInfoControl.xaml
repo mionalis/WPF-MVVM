@@ -43,8 +43,11 @@
           </TextBox>
         <TextBlock Text="PhoneNumber:" Margin="3"/>
         <TextBox
+            Name="PhoneNumberTextBox"
             Margin="3" 
             IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+            PreviewTextInput="PhoneNumberTextBox_PreviewInput"
+            DataObject.Pasting="PhoneNumberTextBox_OnPasting"
             Style="{StaticResource ValidationStyleOfTextBox}">
             <TextBox.Text>
                 <Binding Path="CurrentContact.PhoneNumber" UpdateSourceTrigger="PropertyChanged">

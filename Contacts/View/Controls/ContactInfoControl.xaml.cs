@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace View.Controls
 {
@@ -23,6 +13,33 @@ namespace View.Controls
         public ContactInfoControl()
         {
             InitializeComponent();
+        }
+
+        public string PhoneNumberPattern => @"[\+\-\(\)\d]";
+
+        private void PhoneNumberTextBox_PreviewInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!Regex.IsMatch(e.Text, PhoneNumberPattern))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void PhoneNumberTextBox_OnPasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(string)))
+            {
+                var enteredText = (string)e.DataObject.GetData(typeof(string));
+
+                if (!Regex.IsMatch(enteredText, PhoneNumberPattern))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
         }
     }
 }
