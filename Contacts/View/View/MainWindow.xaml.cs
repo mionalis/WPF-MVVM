@@ -1,4 +1,5 @@
-﻿using System;
+﻿using View.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModel.ViewModels;
 
-namespace View
+namespace View.View
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

@@ -1,12 +1,12 @@
 ﻿using System;
-using View.Model.Services;
+using Model.Services;
 
-namespace View.Model
+namespace Model
 {
     /// <summary>
     /// Хранит информацию контакта телефонной книги.
     /// </summary>
-    internal class Contact
+    public class Contact : ICloneable
     {
         /// <summary>
         /// Фамилия и имя контакта. Формат ввода: "Ivanov Ivan".
@@ -36,7 +36,6 @@ namespace View.Model
         /// </summary>
         public Contact()
         {
-
         }
 
         /// <summary>
@@ -80,6 +79,15 @@ namespace View.Model
                     maxPhoneNumberLength, 
                     nameof(FullName));
             }
+        }
+
+        /// <summary>
+        /// Создает копию объекта класса.
+        /// </summary>
+        /// <returns>Копия объекта.</returns>
+        public object Clone()
+        {
+            return new Contact(FullName, Email, PhoneNumber);
         }
     }
 }

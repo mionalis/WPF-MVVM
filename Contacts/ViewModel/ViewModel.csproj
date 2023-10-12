@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{128EC05C-620A-46BB-A5E0-429D3A793432}</ProjectGuid>
+    <ProjectGuid>{B2F34B4F-456F-4932-85AE-5022DCE259FC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>View</RootNamespace>
-    <AssemblyName>View</AssemblyName>
+    <RootNamespace>ViewModel</RootNamespace>
+    <AssemblyName>ViewModel</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -86,14 +86,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VisibilityConverter.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="Services\ContactSerializer.cs" />
+    <Compile Include="ViewModels\ContactVM.cs" />
+    <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -127,9 +122,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
-      <Project>{B2F34B4F-456F-4932-85AE-5022DCE259FC}</Project>
-      <Name>ViewModel</Name>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{FB3C0A70-54E2-4F40-94A9-AEFE353E72F6}</Project>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

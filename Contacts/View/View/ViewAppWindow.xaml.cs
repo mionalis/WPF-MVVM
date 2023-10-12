@@ -12,19 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModel.ViewModels;
+using View.ViewModel;
 
 namespace View
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ViewAppWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ViewAppWindow : Window
     {
-        public MainWindow()
+        public ViewAppWindow()
         {
             InitializeComponent();
-            DataContext = new MainVM();
         }
     }
 }

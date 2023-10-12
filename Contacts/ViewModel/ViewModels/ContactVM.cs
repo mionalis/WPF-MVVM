@@ -1,62 +1,29 @@
-﻿using System.ComponentModel;
+﻿using Model;
+using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using View.Model;
-using View.Model.Services;
 
-namespace View.ViewModel
+namespace ViewModel.ViewModels
 {
-    /// <summary>
-    /// Реализует ViewModel для главного окна.
-    /// </summary>
-    internal class MainVM : INotifyPropertyChanged
+    public class ContactVM : INotifyPropertyChanged, ICloneable
     {
         /// <summary>
-        /// Команда сохранения контакта в файл.
+        /// Создаёт экземпляр класса <see cref="ContactVM"/>.
         /// </summary>
-        private RelayCommand _saveCommand;
+        /// <param name="contact">Контакт.</param>
+        public ContactVM(Contact contact)
+        {
+            Contact = contact;
+        }
 
-        /// <summary>
-        /// Команда загрузки сохраненного контакта из файла.
-        /// </summary>
-        private RelayCommand _loadCommand;
+        public ContactVM()
+        {
+        }
 
         /// <summary>
         /// Возвращает и задает контакт: экземпляр класса Contact. 
         /// </summary>
         public Contact Contact { get; set; } = new Contact();
-
-        /// <summary>
-        /// Возвращает команду сохранения контакта в файл.
-        /// </summary>
-        public RelayCommand SaveCommand
-        {
-            get
-            {
-                return _saveCommand ??
-                       (_saveCommand = new RelayCommand(obj =>
-                       {
-                           ContactSerializer.Save(Contact);
-                       }));
-            }
-        }
-
-        /// <summary>
-        /// Возвращает команду загрузки сохраненного контакта из файла.
-        /// </summary>
-        public RelayCommand LoadCommand
-        {
-            get
-            {
-                return _loadCommand ??
-                       (_loadCommand = new RelayCommand(obj =>
-                       {
-                           var contact = ContactSerializer.Load();
-                           FullName = contact.FullName;
-                           Email = contact.Email;
-                           PhoneNumber = contact.PhoneNumber;
-                       }));
-            }
-        }
 
         /// <summary>
         /// Возвращает и задает фамилию и имя контакта. Формат ввода: "Ivanov Ivan".
@@ -109,6 +76,16 @@ namespace View.ViewModel
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        /// <summary>
+        /// Создает копию объекта класса.
+        /// </summary>
+        /// <returns>Копия объекта.</returns>
+        public object Clone()
+        {
+            var contactClone = (Contact)Contact.Clone();
+            return new ContactVM(contactClone);
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace View.Model.Services
+namespace Model.Services
 {
     /// <summary>
     /// Реализует валидацию значений.
     /// </summary>
-    internal static class ValueValidator
+    public static class ValueValidator
     {
         /// <summary>
         /// Проверяет, не превышает ли длина строки заданной величины.
