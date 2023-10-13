@@ -92,11 +92,7 @@ namespace ViewModel.ViewModels
         public bool IsEnabled
         {
             get => _isEnabled;
-            set
-            {
-                _isEnabled = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _isEnabled, value);
         }
 
         /// <summary>
@@ -105,11 +101,7 @@ namespace ViewModel.ViewModels
         public bool IsVisible
         {
             get => _isVisible;
-            set
-            {
-                _isVisible = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _isVisible, value);
         }
 
         /// <summary>
@@ -118,11 +110,7 @@ namespace ViewModel.ViewModels
         public bool IsReadOnly
         {
             get => _isReadOnly;
-            set
-            {
-                _isReadOnly = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _isReadOnly, value);
         }
 
         /// <summary>

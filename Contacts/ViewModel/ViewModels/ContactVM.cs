@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Model.Services;
 using ViewModel.Services;
 
@@ -12,7 +13,7 @@ namespace ViewModel.ViewModels
     /// <summary>
     /// Реализует ViewModel для класса Contact.
     /// </summary>
-    public class ContactVM : INotifyPropertyChanged, ICloneable, IDataErrorInfo
+    public class ContactVM : ObservableObject, ICloneable, IDataErrorInfo
     {
         /// <summary>
         /// Валидность введенных данных.
@@ -120,7 +121,6 @@ namespace ViewModel.ViewModels
             set
             {
                 Contact.FullName = value;
-                OnPropertyChanged(nameof(FullName));
             }
         }
 
@@ -133,7 +133,6 @@ namespace ViewModel.ViewModels
             set
             {
                 Contact.PhoneNumber = value;
-                OnPropertyChanged(nameof(PhoneNumber));
             }
         }
 
@@ -146,22 +145,7 @@ namespace ViewModel.ViewModels
             set
             {
                 Contact.Email = value;
-                OnPropertyChanged(nameof(Email));
             }
-        }
-
-        /// <summary>
-        /// Срабатывает, когда объект класса изменяет значение свойства.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Вызывает событие PropertyChanged при изменении свойства.
-        /// </summary>
-        /// <param name="prop"></param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
         /// <summary>
