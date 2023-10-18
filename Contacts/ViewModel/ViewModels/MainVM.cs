@@ -39,7 +39,7 @@ namespace ViewModel.ViewModels
         /// <summary>
         /// Доступность редактирования текстового поля.
         /// </summary>
-        private bool _isReadOnly;
+        private bool _isReadOnly = true;
 
         /// <summary>
         /// Доступность объекта.

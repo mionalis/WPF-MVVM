@@ -24,7 +24,7 @@ namespace View
             object parameter, 
             CultureInfo culture)
         {
-            return (bool)value ? Visibility.Visible : Visibility.Hidden;
+            return value != null && (bool)value ? Visibility.Visible : Visibility.Hidden;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace View
             object parameter, 
             CultureInfo culture)
         {
-            return (Visibility)value == Visibility.Visible;
+            return value != null && (Visibility)value == Visibility.Visible;
         }
     }
 }

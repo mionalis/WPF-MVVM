@@ -5,11 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:View"
         xmlns:viewModels="clr-namespace:ViewModel.ViewModels;assembly=ViewModel"
+        xmlns:uc="clr-namespace:View.Controls"
         d:DataContext="{d:DesignInstance Type=viewModels:MainVM}"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="230" MinWidth="535">
     <Window.Resources>
         <view:VisibilityConverter x:Key="VisibilityConverter" />
+        <DataTemplate x:Key="ContactTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image 
+                    Source="/Resources/icon.png" 
+                    Grid.Column="0" 
+                    Width="40"
+                    Height="40"
+                    Margin="3"/>
+                <StackPanel
+                    Grid.Column="1" 
+                    Margin="3">
+                    <TextBlock
+                        FontSize="12"
+                        FontWeight="SemiBold"
+                        Text="{Binding FullName}"/>
+                    <TextBlock
+                        FontSize="10"
+                        Text="{Binding PhoneNumber}"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -48,9 +74,11 @@
                     IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top" LastChildFill="true">
-                <ListBox Margin="3" DisplayMemberPath="FullName"
-                         ItemsSource="{Binding Path=Contacts, UpdateSourceTrigger=PropertyChanged}"
-                         SelectedItem="{Binding Path=CurrentContact, UpdateSourceTrigger=PropertyChanged}"/>
+                <ListBox
+                    ItemTemplate="{StaticResource ContactTemplate}"
+                    Margin="3"
+                    ItemsSource="{Binding Path=Contacts, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding Path=CurrentContact, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
         </DockPanel>
         <GridSplitter 
@@ -67,25 +95,15 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="1">
-                <TextBlock Text="Name:" Margin="3"/>
-                <TextBox
-                    Margin="3" 
-                    Text="{Binding Path=CurrentContact.FullName, UpdateSourceTrigger=PropertyChanged}"
-                    IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Text="PhoneNumber:" Margin="3"/>
-                <TextBox 
-                    Margin="3"
-                    Text="{Binding Path=CurrentContact.PhoneNumber,
-                    UpdateSourceTrigger=PropertyChanged}"
-                    IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Text="Email:" Margin="3"/>
-                <TextBox 
-                    Margin="3"
-                    Text="{Binding Path=CurrentContact.Email,
-                    UpdateSourceTrigger=PropertyChanged}"
-                    IsReadOnly="{Binding Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
+            <Image 
+                Source="/Resources/icon.png" 
+                Grid.Row="0" 
+                Grid.Column="0" 
+                Width="100"
+                Height="100"
+                Margin="3,25,3,3"
+                VerticalAlignment="Top"/>
+            <uc:ContactInfoControl Grid.Row="0" Grid.Column="1"/>
             <Button 
                 Grid.Row="1"
                 Grid.Column="1"
@@ -93,17 +111,12 @@
                 Height="25" 
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Margin="3, 6"
+                Margin="3, 20, 3, 3"
                 Content="Apply"
                 Command="{Binding Path=ApplyContactCommand}"
-                Visibility="{Binding IsVisible, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource VisibilityConverter}}"/>
-            <Image 
-                Grid.Row="0" 
-                Grid.Column="0" 
-                Width="100"
-                Height="100"
-                Margin="3,25,3,0"
-                VerticalAlignment="Top"/>
+                IsEnabled="{Binding CurrentContact.IsValid}"
+                Visibility="{Binding IsVisible, UpdateSourceTrigger=PropertyChanged,
+                    Converter={StaticResource VisibilityConverter}}"/>
         </Grid>
     </Grid>
 </Window>
