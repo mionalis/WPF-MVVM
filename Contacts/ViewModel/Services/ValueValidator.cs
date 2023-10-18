@@ -39,6 +39,7 @@ namespace ViewModel.Services
         /// <returns>>Строка с сообщением об ошибке.</returns>
         public static string ValidatePhoneNumber(string phoneNumber, int maxLength)
         {
+            // Регулярное выражение для строки типа "+X (XXX) XXX-XX-XX", где X - цифры от 0 до 9.
             var phoneNumberPattern = @"^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$";
 
             if (Regex.IsMatch(phoneNumber, phoneNumberPattern) && phoneNumber.Length < maxLength)
@@ -62,6 +63,7 @@ namespace ViewModel.Services
         /// <returns>Строка с сообщением об ошибке.</returns>
         public static string ValidateEmail(string email, int maxLength)
         {
+            // Регулярное выражение для строки типа "name@domain.com".
             var emailPattern = @"^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$";
 
             if (Regex.IsMatch(email, emailPattern) && email.Length < maxLength)
